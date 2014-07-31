@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Ringee</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" charset="utf-8" src="www/cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="www/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="www/jquery_mobile/jquery.mobile-1.4.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="www/jquery_mobile/jquery.mobile-1.4.3.min.css"/>
+<script type="text/javascript" charset="utf-8">
+document.addEventListener("deviceready", onDeviceReady, false);
+$( document ).bind( "mobileinit", function() {    
+       $.mobile.allowCrossDomainPages = true;  
+        $.support.cors = true;
+        $.mobile.pushStateEnabled = false;
+     }); 
+     
+function onDeviceReady() {
+	alert("device ready");
+    $('#login_btn').click(function() {
+ 		 $.ajax({
+	        url: "http://localhost:8080/ringeeweb/user/signin",
+	        type: "post",
+	        crossDomain: true,
+	        cache: false,
+	        data: "userName=" + $("#username_txt").val() + '&password=' + $("#password_txt").val(),
+	        dataType: "jsonp",
+	        async: true,
+	        success: function(data) {
+	            alert("ok");
+	        },
+	        error : function(data){
+	            alert("not ok");
+	        }
+
+    });
+  });   
+  }
+  
+</script>
+</head>
+<body>
+<div data-role="page" id="main">
+<div data-role="header" class="ui-bar">
+<h2>Ringee</h2>
+</div>
+<div data-role="content">
+<div data-role="fieldcontain">
+    <label for="text-1">User Name :</label>
+     <input type="text" data-clear-btn="true" name="text-1" id="username_txt" value="">
+     <label for="text-1">Password :</label>
+      <input type="password" data-clear-btn="true" name="text-2" id="password_txt" value="">
+	<br>
+	<input id="login_btn" type="button" value="login"></button>
+
+</div> 
+</div>
+<div data-role="footer">
+<h1>Deepamsoft</h1>
+</div>
+</div>
+</body>
+</html>
